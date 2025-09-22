@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 5001
 
 connectDB();
 
-app.use("/api/notes", notesRoutes)
+// midddleware
+app.use(express.json());
+
+app.use("/api/notes", notesRoutes);
 
 app.listen(PORT,() => {
     console.log("Sever has started on PORT: ", PORT);
