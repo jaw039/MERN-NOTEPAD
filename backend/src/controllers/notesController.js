@@ -2,7 +2,7 @@
 
  export async function getAllNotes(req,res) {
     try{
-        const notes = await Note.find()
+        const notes = await Note.find().sort({createdAt: -1}); // show the newest first
         res.status(200).json(notes)
 
     } catch(error) {
