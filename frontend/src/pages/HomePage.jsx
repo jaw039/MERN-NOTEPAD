@@ -2,19 +2,33 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import RateLimitedUi from "../components/RateLimitedUI";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
-  const [isRateLimited, setRateLimited] = useState(true);
+  const [isRateLimited, setIsRateLimited] = useState(false);  
   const [notes, setNotes] = useState([]);
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNotes = async () => {
       try {
         const res = await axios.get("http://localhost:5001/api/notes");
         console.log(res.data);
+        setNotes(res.data)
+        setIsRateLimited(false)
       } catch (error) {
-          console.log("Error fetching Notes");
+          console.log("API Error:", error);
+          console.log("Error type:", error.name);
+          console.log("Error message:", error.message);
+          if(error.response?.status === 429) {
+            setIsRateLimited(true)
+          }
+          else {
+            toast.error("Fail to fetch Notes")
+          }
+      } finally {
+        console.log("loading is false");
+        setLoading(false)
       }
 
     };
