@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import RateLimitedUi from "../components/RateLimitedUI";
+import NoteCard from "../components/NoteCard";
 import axios from "axios";
 import toast from "react-hot-toast";
+
 
 const HomePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);  
@@ -42,9 +44,18 @@ const HomePage = () => {
       <Navbar />
 
       {isRateLimited && <RateLimitedUi />}
+        {loading  && <div className = "text-center text-primary py-10">Loading Notes....</div>}
+        {notes.length > 0 && !isRateLimited && (
+          <div className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {notes.map(note => (
+            <NoteCard key = {note._id} note = {note} />
+          ))}
+
+          </div>
+        )}
     </div>
 
   );
 };
-
+ 
 export default HomePage;
