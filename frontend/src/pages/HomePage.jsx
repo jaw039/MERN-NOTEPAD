@@ -27,7 +27,7 @@ const HomePage = () => {
             toast.error("Fail to fetch Notes")
           }
       } finally {
-        console.log("loading is false");
+        console.log("loading is success");
         setLoading(false)
       }
 

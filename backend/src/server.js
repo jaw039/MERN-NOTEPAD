@@ -12,12 +12,14 @@ const PORT = process.env.PORT || 5001
 
 
 // midddleware (runs before route handlers)
-// convert incoming JSON requests into Javascript objecst on req.body
-app.use(express.json());
-app.use(rateLimiter)
 app.use(cors({
     origin: "http://localhost:5173",
 }))
+
+// convert incoming JSON requests into Javascript objecst on req.body
+app.use(express.json());
+app.use(rateLimiter)
+
 
 // custom middleware 
 app.use((req,res,next) => {
