@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js"
 import dotenv from "dotenv";
 import rateLimiter from "./middleware/rateLimiter.js";
 
+import cors from "cors"
 dotenv.config();
 
 const app = express(); 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5001
 // convert incoming JSON requests into Javascript objecst on req.body
 app.use(express.json());
 app.use(rateLimiter)
+app.use(cors())
 
 // custom middleware 
 app.use((req,res,next) => {
