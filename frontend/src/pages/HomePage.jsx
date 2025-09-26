@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import RateLimitedUi from "../components/RateLimitedUI";
-import NoteCard from "../components/NoteCard";
-import api from "../libs/axios";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Navbar from "../components/Navbar";
+import NoteCard from "../components/NoteCard";
+import NotesNotFound from "../components/NotesNotFound";
+import RateLimitedUi from "../components/RateLimitedUI";
+import api from "../libs/axios";
 
 
 const HomePage = () => {
@@ -47,6 +48,7 @@ const HomePage = () => {
 
       <div className="max-w-7xl mx-auto p-4 mt-6">
         {loading  && <div className = "text-center text-primary py-10">Loading Notes....</div>}
+        {notes.length === 0 && !isRateLimited && <NotesNotFound />}
         {notes.length > 0 && !isRateLimited && (
           <div className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {notes.map(note => (
