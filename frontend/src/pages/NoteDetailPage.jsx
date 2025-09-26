@@ -30,10 +30,38 @@ const NoteDetailPage = () => {
   fetchNote();
   }, [id]);
 
-  const handleDelete = () => {
-    
+  const handleDelete = async() => {
+    if (!window.confirm ("Are you sure you want to delete this note?")) return;
+
+    try {
+      await api.delete(`/notes/${id}`);
+      toast.success("Note deleted");
+      navigate("/")
+    } catch(error) {
+      console.log("Error deleting the note:", error);
+      toast.error("Failed to deleted note");
+
+    }
   };
-  const handleSave = () => {};
+
+  const handleSave = async() => {
+    if (!note.title.trim() || !note.content.trim()) {
+      toast.error("Please add a title or content");
+      return;
+    }
+
+    setSaving(true)
+
+    try {
+      await api.put(`/notes/${id}`, note);
+      toast.success("Note updated successfully");
+      navigate("/")
+      
+    } catch (error) {
+      console.log("Error saving the note:", error);
+      toast.error("Failed to update note");
+    }
+  };
 
   if(loading) {
     return (
