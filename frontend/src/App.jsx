@@ -7,8 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
-    <div data-theme = "nord">
-        <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#00FF9D40_100%)]" />
+    <div data-theme="nord" className="min-h-screen bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
         <Routes>
             <Route path = "/" element = {<HomePage />} />
             <Route path = "/create" element = {<CreatePage />} />
@@ -20,3 +19,6 @@ const App = () => {
 };
 
 export default App;
+
+
+
