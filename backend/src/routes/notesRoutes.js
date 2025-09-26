@@ -8,7 +8,8 @@ router.get("/", getAllNotes);
 
 router.get("/:id", getNoteById);
 
-router.post("/:id", createNote);
+// Dont need the :id parameter because we're only modifying something that already exists 
+router.post("/", createNote);
 
 router.put("/:id", updateNote);
 

@@ -1,14 +1,42 @@
 import { ArrowLeftIcon } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { Link, useNavigate } from "react-router";
 
 const CreatePage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false)
+  
+  // from react router
+  const navigate = useNavigate()
+  
+// e means event 
+// needs to be an async function in order to use await
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(title);
+    // console.log(content);
 
-  const handleSubmit = () => {
-
+    if(!title.trim() || !content.trim()) {
+      toast.error("All fields are required")
+      return  
+    }
+    setLoading(true)
+    try {
+      await axios.post("http://localhost:5001/api/notes", {
+        title,
+        content
+      });
+      toast.success("Note were created successfully!\nKeep it up!!!");
+      navigate("/");
+    } catch (error) {
+      console.log("Error creating note", error);
+      toast.error("Failed to create note!")
+    } finally {
+      setLoading(false)
+    }
   };
 
 
