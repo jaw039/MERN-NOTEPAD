@@ -1,0 +1,21 @@
+{
+  "name": "mern-notepad",
+  "version": "1.0.0",
+  "description": "A full-stack note-taking application built with MongoDB, Express, React, and Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "built": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaw039/MERN-NOTEPAD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaw039/MERN-NOTEPAD/issues"
+  },
+  "homepage": "https://github.com/jaw039/MERN-NOTEPAD#readme"
+}
